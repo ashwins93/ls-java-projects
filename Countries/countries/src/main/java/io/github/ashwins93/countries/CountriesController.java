@@ -265,6 +265,14 @@ public class CountriesController {
         (c1, c2) -> c2.getPopulation() > c1.getPopulation() ? c2 : c1);
   }
 
+  @GetMapping("/population/median")
+  public Country getCountryWithMedianPopulation() {
+    countryList.sort((c1, c2) -> (int) (c1.getPopulation() - c2.getPopulation()));
+    int totalCountries = countryList.size();
+
+    return totalCountries % 2 == 0 ? countryList.get(totalCountries / 2 - 1) : countryList.get(totalCountries / 2);
+  }
+
   @GetMapping("/age/age/{age}")
   public ArrayList<Country> getCountriesWithAge(@PathVariable int age) {
     ArrayList<Country> result = new ArrayList<>(countryList.size());
@@ -281,5 +289,13 @@ public class CountriesController {
   @GetMapping("/age/max")
   public Country getCountryWithMaxAge() {
     return countryList.stream().reduce(countryList.get(0), (c1, c2) -> c2.getMedianAge() > c1.getMedianAge() ? c2 : c1);
+  }
+
+  @GetMapping("/age/median")
+  public Country getCountryWithMedianAge() {
+    countryList.sort((c1, c2) -> c1.getMedianAge() - c2.getMedianAge());
+    int totalCountries = countryList.size();
+
+    return totalCountries % 2 == 0 ? countryList.get(totalCountries / 2 - 1) : countryList.get(totalCountries / 2);
   }
 }
