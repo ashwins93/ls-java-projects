@@ -265,4 +265,21 @@ public class CountriesController {
         (c1, c2) -> c2.getPopulation() > c1.getPopulation() ? c2 : c1);
   }
 
+  @GetMapping("/age/age/{age}")
+  public ArrayList<Country> getCountriesWithAge(@PathVariable int age) {
+    ArrayList<Country> result = new ArrayList<>(countryList.size());
+    countryList.stream().filter(country -> country.getMedianAge() >= age).forEach(country -> result.add(country));
+
+    return result;
+  }
+
+  @GetMapping("/age/min")
+  public Country getCountryWithMinAge() {
+    return countryList.stream().reduce(countryList.get(0), (c1, c2) -> c2.getMedianAge() < c1.getMedianAge() ? c2 : c1);
+  }
+
+  @GetMapping("/age/max")
+  public Country getCountryWithMaxAge() {
+    return countryList.stream().reduce(countryList.get(0), (c1, c2) -> c2.getMedianAge() > c1.getMedianAge() ? c2 : c1);
+  }
 }
