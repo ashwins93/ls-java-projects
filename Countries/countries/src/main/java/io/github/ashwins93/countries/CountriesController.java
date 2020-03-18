@@ -2,12 +2,10 @@ package io.github.ashwins93.countries;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.function.Predicate;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class CountriesController {
@@ -246,6 +244,25 @@ public class CountriesController {
         .forEach(country -> result.add(country));
 
     return result;
+  }
+
+  @GetMapping("/population/size/{size}")
+  public ArrayList<Country> getContriesWithPopuList(@PathVariable long size) {
+    ArrayList<Country> result = new ArrayList<>(countryList.size());
+    countryList.stream().filter(country -> country.getPopulation() >= size).forEach(country -> result.add(country));
+    return result;
+  }
+
+  @GetMapping("/population/min")
+  public Country getCountryWithMinPopulation() {
+    return countryList.stream().reduce(countryList.get(0),
+        (c1, c2) -> c2.getPopulation() < c1.getPopulation() ? c2 : c1);
+  }
+
+  @GetMapping("/population/max")
+  public Country getCountryWithMaxPopulation() {
+    return countryList.stream().reduce(countryList.get(0),
+        (c1, c2) -> c2.getPopulation() > c1.getPopulation() ? c2 : c1);
   }
 
 }
