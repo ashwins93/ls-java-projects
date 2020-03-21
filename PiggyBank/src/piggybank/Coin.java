@@ -53,6 +53,10 @@ public class Coin {
     return faceValueCents;
   }
 
+  public void setQuantity(int qty) {
+    quantity = qty;
+  }
+
   public int getQuantity() {
     return quantity;
   }

@@ -18,7 +18,17 @@ public class Main {
     piggyBank.printContents();
 
     float totalValueDollars = piggyBank.getTotalValueCents() / 100f;
+    System.out.println("The piggy bank holds " + fp.format(totalValueDollars));
 
+    System.out.println("---");
+
+    int balance = piggyBank.subtractValue(1.50f);
+
+    if (balance > 0) {
+      System.out.println("Not enough change for balance " + balance);
+    }
+    piggyBank.printContents();
+    totalValueDollars = piggyBank.getTotalValueCents() / 100f;
     System.out.println("The piggy bank holds " + fp.format(totalValueDollars));
   }
 }
