@@ -39,7 +39,7 @@ public class Order {
 
 	@ManyToMany
 	@JoinTable(name = "orderspayments",
-			   joinColumns = @JoinColumn(name = "ordernum"),
+			   joinColumns = @JoinColumn(name = "ordnum"),
 			   inverseJoinColumns = @JoinColumn(name = "paymentid"))
 	@JsonIgnoreProperties(value = "orders")
 	private List<Payment> payments = new ArrayList<Payment>();

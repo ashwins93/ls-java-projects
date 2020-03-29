@@ -40,6 +40,7 @@ public class Customer {
 	private String custname;
 	private String custcity;
 	private String workingarea;
+	private String custcountry;
 	private String grade;
 	private double openingamt;
 	private double receiveamt;
@@ -177,6 +178,14 @@ public class Customer {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public String getCustcountry() {
+		return custcountry;
+	}
+
+	public void setCustcountry(String custcountry) {
+		this.custcountry = custcountry;
 	}
 	
 	
