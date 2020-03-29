@@ -1,5 +1,8 @@
 package com.lambdaschool.javaorders.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,26 @@ public class OrderServiceImpl implements OrderService {
 				.orElseThrow(() -> new EntityNotFoundException("Order not found " + id));
 		
 		return foundOrder;
+	}
+
+	@Override
+	public List<Order> findAllOrders() {
+		List<Order> orders = new ArrayList<Order>();
+		orderrepos.findAll().iterator().forEachRemaining(orders::add);
+		
+		return orders;
+	}
+
+	@Override
+	public List<Order> findOrdersWithAdvance() {
+		List<Order> orders = new ArrayList<Order>();
+		orderrepos.findAll().iterator().forEachRemaining(order -> {
+			if(order.getAdvanceamount() > 0) {
+				orders.add(order);
+			}
+		});
+		
+		return orders;
 	}
 
 }

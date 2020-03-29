@@ -34,16 +34,15 @@ public class Order {
 
 	@ManyToOne
 	@JoinColumn(name = "custcode", nullable = false)
-	@JsonIgnoreProperties(value = { "orders" })
+	@JsonIgnoreProperties(value = { "orders", "agent" })
 	private Customer customer;
 
 	@ManyToMany
 	@JoinTable(name = "orderspayments",
-			   joinColumns = @JoinColumn(name = "ordnum"),
-			   inverseJoinColumns = @JoinColumn(name = "paymentid"))
-	@JsonIgnoreProperties(value = "orders")
+			   joinColumns = @JoinColumn(name = "ordnum"), inverseJoinColumns = @JoinColumn(name = "paymentid"))
+	@JsonIgnoreProperties(value = { "orders" })
 	private List<Payment> payments = new ArrayList<Payment>();
-	
+
 	public Order() {
 	}
 
@@ -102,6 +101,5 @@ public class Order {
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
-	
 
 }
