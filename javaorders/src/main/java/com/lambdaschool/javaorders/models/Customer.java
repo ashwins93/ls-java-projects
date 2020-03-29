@@ -55,7 +55,7 @@ public class Customer {
 	private Agent agent;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = {"customer"})
+	@JsonIgnoreProperties(value = {"customer", "payments"})
 	private List<Order> orders = new ArrayList<Order>();
 	
 	public Customer() {

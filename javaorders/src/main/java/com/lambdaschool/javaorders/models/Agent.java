@@ -35,7 +35,7 @@ public class Agent {
 	private String country;
 	
 	@OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = {"agent"})
+	@JsonIgnoreProperties(value = {"agent", "orders"})
 	private List<Customer> customers = new ArrayList<Customer>();
 	
 	public Agent() {
