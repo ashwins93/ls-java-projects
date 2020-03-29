@@ -9,5 +9,5 @@ public interface CustomerService {
 	
 	public Customer findCustomerById(long id);
 	
-	public Customer searchCustomerByName(String namelike);
+	public List<Customer> searchCustomerByName(String namelike);
 }

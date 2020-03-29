@@ -3,6 +3,8 @@ package com.lambdaschool.javaorders.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +26,26 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer findCustomerById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer foundCustomer = custrepos
+				.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Customer not found " + id));
+		
+		return foundCustomer;
 	}
 
 	@Override
-	public Customer searchCustomerByName(String namelike) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Customer> searchCustomerByName(String namelike) {
+		List<Customer> customers = new ArrayList<>();
+		
+		custrepos.findAll()
+			.iterator()
+			.forEachRemaining(customer -> {
+				if(customer.getCustname().contains(namelike)) {
+					customers.add(customer);
+				}
+			});
+		
+		return customers;
 	}
 
 }
