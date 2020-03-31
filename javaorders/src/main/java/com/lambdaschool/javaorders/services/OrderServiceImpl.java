@@ -9,16 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lambdaschool.javaorders.models.Order;
-import com.lambdaschool.javaorders.models.Payment;
 import com.lambdaschool.javaorders.repositories.OrderRepository;
 
 @Service(value = "orderService")
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepository orderrepos;
-	
-	@Autowired
-	private PaymentService paymentService;
 
 	@Override
 	public Order findOrderById(long id) {

@@ -11,8 +11,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,5 +66,25 @@ public class CustomersController {
 		responseHeaders.setLocation(newCustomerURI);
 		
 		return new ResponseEntity<>(responseHeaders, HttpStatus.CREATED);
+	}
+	
+	// PUT /api/customers/{id}
+	@PutMapping(value = "/{id}", consumes = {"application/json"})
+	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Customer customer, 
+			@PathVariable long id) {
+		customer.setCustcode(id);
+		service.updateCustomer(customer);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	// PATCH /api/customers/{id}
+	@PatchMapping(value = "/{id}", consumes = {"application/json"})
+	public ResponseEntity<?> updateCustomerPartial(@RequestBody Customer customer,
+			@PathVariable long id) {
+		customer.setCustcode(id);
+		service.updateCustomer(customer);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

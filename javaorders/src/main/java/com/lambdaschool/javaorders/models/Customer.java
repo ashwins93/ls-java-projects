@@ -42,10 +42,10 @@ public class Customer {
 	private String workingarea;
 	private String custcountry;
 	private String grade;
-	private double openingamt;
-	private double receiveamt;
-	private double paymentamt;
-	private double outstandingamt;
+	private Double openingamt;
+	private Double receiveamt;
+	private Double paymentamt;
+	private Double outstandingamt;
 	private String phone;
 	
 	
@@ -54,7 +54,7 @@ public class Customer {
 	@JsonIgnoreProperties(value = {"customers"})
 	private Agent agent;
 	
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties(value = {"customer"}, allowSetters = true)
 	private List<Order> orders = new ArrayList<Order>();
 	
@@ -124,7 +124,7 @@ public class Customer {
 		this.grade = grade;
 	}
 
-	public double getOpeningamt() {
+	public Double getOpeningamt() {
 		return openingamt;
 	}
 
@@ -132,7 +132,7 @@ public class Customer {
 		this.openingamt = openingamt;
 	}
 
-	public double getReceiveamt() {
+	public Double getReceiveamt() {
 		return receiveamt;
 	}
 
@@ -140,7 +140,7 @@ public class Customer {
 		this.receiveamt = receiveamt;
 	}
 
-	public double getPaymentamt() {
+	public Double getPaymentamt() {
 		return paymentamt;
 	}
 
@@ -148,7 +148,7 @@ public class Customer {
 		this.paymentamt = paymentamt;
 	}
 
-	public double getOutstandingamt() {
+	public Double getOutstandingamt() {
 		return outstandingamt;
 	}
 
