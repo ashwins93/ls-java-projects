@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,6 +86,13 @@ public class CustomersController {
 		customer.setCustcode(id);
 		service.updateCustomer(customer);
 		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	// DELETE /api/customers/{id}
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<?> deleteCustomer(@PathVariable long id){
+		service.deleteCustomerById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

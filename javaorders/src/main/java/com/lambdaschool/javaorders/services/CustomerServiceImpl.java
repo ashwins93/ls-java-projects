@@ -147,14 +147,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if (customer.getOrders().size() > 0) {
 			newCustomer.getOrders().clear();
 			
-			System.out.println("******** Customer orders before ********");
-			for(Order o: newCustomer.getOrders()) {
-				System.out.println(o.getOrderdescription());
-			}
-			System.out.println("******** Customer orders before ********");
-			
 			for (Order o : customer.getOrders()) {
-				System.out.println("Input order: " + o.getOrderdescription());
 				Order newOrder = new Order(
 						o.getOrdamount(), 
 						o.getAdvanceamount(), 
@@ -168,12 +161,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 				newCustomer.getOrders().add(newOrder);
 			}
-			
-			System.out.println("******** Customer orders after ********");
-			for(Order o: newCustomer.getOrders()) {
-				System.out.println(o.getOrderdescription());
-			}
-			System.out.println("******** Customer orders after ********");
 		}
 
 		return custrepos.save(newCustomer);
