@@ -55,7 +55,7 @@ public class Customer {
 	private Agent agent;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = {"customer", "payments"})
+	@JsonIgnoreProperties(value = {"customer"}, allowSetters = true)
 	private List<Order> orders = new ArrayList<Order>();
 	
 	public Customer() {
@@ -186,7 +186,6 @@ public class Customer {
 
 	public void setCustcountry(String custcountry) {
 		this.custcountry = custcountry;
-	}
-	
+	}	
 	
 }

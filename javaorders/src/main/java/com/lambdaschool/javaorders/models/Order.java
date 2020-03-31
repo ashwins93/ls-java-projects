@@ -39,8 +39,9 @@ public class Order {
 
 	@ManyToMany
 	@JoinTable(name = "orderspayments",
-			   joinColumns = @JoinColumn(name = "ordnum"), inverseJoinColumns = @JoinColumn(name = "paymentid"))
-	@JsonIgnoreProperties(value = { "orders" })
+			   joinColumns = @JoinColumn(name = "ordnum"), 
+			   inverseJoinColumns = @JoinColumn(name = "paymentid"))
+	@JsonIgnoreProperties(value = { "orders" }, allowSetters = true)
 	private List<Payment> payments = new ArrayList<Payment>();
 
 	public Order() {
@@ -102,4 +103,13 @@ public class Order {
 		this.payments = payments;
 	}
 
+	public void addPayment(Payment payment) {
+		payments.add(payment);
+		payment.getOrders().add(this);
+	}
+	
+	public void removePayment(Payment payment) {
+		payments.remove(payment);
+		payment.getOrders().remove(this);
+	}
 }

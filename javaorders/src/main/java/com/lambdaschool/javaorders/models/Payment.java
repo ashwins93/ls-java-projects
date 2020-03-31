@@ -24,7 +24,7 @@ public class Payment {
 	private String type;
 	
 	@ManyToMany(mappedBy = "payments")
-	@JsonIgnoreProperties(value = "payments")
+	@JsonIgnoreProperties(value = "payments", allowSetters = true)
 	private List<Order> orders = new ArrayList<Order>();
 	
 	public Payment() {

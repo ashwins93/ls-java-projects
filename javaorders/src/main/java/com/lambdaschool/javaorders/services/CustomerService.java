@@ -10,4 +10,10 @@ public interface CustomerService {
 	public Customer findCustomerById(long id);
 	
 	public List<Customer> searchCustomerByName(String namelike);
+	
+	public Customer saveCustomer(Customer customer);
+	
+	public Customer updateCustomer(Customer customer, long id);
+	
+	public void deleteCustomerById(long id);
 }
