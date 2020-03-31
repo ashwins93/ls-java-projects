@@ -8,13 +8,21 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lambdaschool.javaorders.models.Customer;
 import com.lambdaschool.javaorders.models.Order;
+import com.lambdaschool.javaorders.models.Payment;
 import com.lambdaschool.javaorders.repositories.OrderRepository;
 
 @Service(value = "orderService")
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepository orderrepos;
+	
+	@Autowired
+	private CustomerService customerService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@Override
 	public Order findOrderById(long id) {
@@ -42,5 +50,53 @@ public class OrderServiceImpl implements OrderService {
 		});
 		
 		return orders;
+	}
+
+	@Override
+	public Order saveOrder(Order order) {
+		Order newOrder = new Order();
+		
+		newOrder.setOrdamount(order.getOrdamount());
+		newOrder.setOrderdescription(order.getOrderdescription());
+		newOrder.setAdvanceamount(order.getAdvanceamount());
+		
+		Customer customer = customerService.findCustomerById(order.getCustomer().getCustcode());
+		
+		newOrder.setCustomer(customer);
+		
+		for(Payment p : order.getPayments()) {
+			Payment payment = paymentService.findPaymentById(p.getPaymentid());
+			newOrder.addPayment(payment);
+		}
+		
+		return orderrepos.save(newOrder);
+	}
+
+	@Override
+	public Order updateOrder(Order order) {
+		Order newOrder = findOrderById(order.getOrdnum());
+		
+		newOrder.setOrdamount(order.getOrdamount());
+		newOrder.setOrderdescription(order.getOrderdescription());
+		newOrder.setAdvanceamount(order.getAdvanceamount());
+		
+		Customer customer = customerService.findCustomerById(order.getCustomer().getCustcode());
+		
+		newOrder.setCustomer(customer);
+		
+		newOrder.getPayments().clear();
+		for(Payment p : order.getPayments()) {
+			Payment payment = paymentService.findPaymentById(p.getPaymentid());
+			newOrder.addPayment(payment);
+		}
+		
+		return orderrepos.save(newOrder);
+	}
+
+	@Override
+	public void deleteOrder(long id) {
+		Order order = findOrderById(id);
+		
+		orderrepos.delete(order);;
 	}
 }

@@ -10,4 +10,10 @@ public interface OrderService {
 	public List<Order> findOrdersWithAdvance();
 	
 	public Order findOrderById(long id);
+	
+	public Order saveOrder(Order order);
+	
+	public Order updateOrder(Order order);
+	
+	public void deleteOrder(long id);
 }
