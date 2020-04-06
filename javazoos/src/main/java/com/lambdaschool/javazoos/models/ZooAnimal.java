@@ -32,15 +32,18 @@ public class ZooAnimal extends Auditable implements Serializable {
 	@JoinColumn(name = "animalid")
 	@JsonIgnoreProperties(value = "zoos", allowSetters = true)
 	private Animal animal;
+	
+	private String incomingzoo;
 
 	public ZooAnimal() {
 		super();
 	}
 
-	public ZooAnimal(Zoo zoo, Animal animal) {
+	public ZooAnimal(Zoo zoo, Animal animal, String incomingzoo) {
 		super();
 		this.zoo = zoo;
 		this.animal = animal;
+		this.incomingzoo = incomingzoo;
 	}
 
 	public Zoo getZoo() {
@@ -57,6 +60,14 @@ public class ZooAnimal extends Auditable implements Serializable {
 
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
+	}
+
+	public String getIncomingzoo() {
+		return incomingzoo;
+	}
+
+	public void setIncomingzoo(String incomingzoo) {
+		this.incomingzoo = incomingzoo;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.lambdaschool.javazoos.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,11 +26,11 @@ public class Zoo extends Auditable {
 
 	@OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value = "zoo")
-	private List<Telephone> telephones;
+	private List<Telephone> telephones = new ArrayList<Telephone>();
 	
 	@OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value = "zoo")
-	private List<ZooAnimal> animals;
+	private List<ZooAnimal> animals = new ArrayList<>();
 
 	public Zoo() {
 		super();

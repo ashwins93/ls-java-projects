@@ -35,6 +35,14 @@ public class Telephone extends Auditable {
 		this.zoo = zoo;
 	}
 
+	public long getPhoneid() {
+		return phoneid;
+	}
+
+	public void setPhoneid(long phoneid) {
+		this.phoneid = phoneid;
+	}
+
 	public String getPhonenumber() {
 		return phonenumber;
 	}
