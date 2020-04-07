@@ -66,4 +66,10 @@ public class ZooServiceImpl implements ZooService {
 		return zooRepo.save(newZoo);
 	}
 
+	@Override
+	public void deleteZooById(long id) {
+		findZooById(id);
+		zooRepo.deleteById(id);
+	}
+
 }
