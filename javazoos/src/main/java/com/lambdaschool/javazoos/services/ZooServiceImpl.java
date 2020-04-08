@@ -23,6 +23,9 @@ public class ZooServiceImpl implements ZooService {
 
 	@Autowired
 	private AnimalService animalService;
+	
+	@Autowired
+	private UserAuditing userAuditing;
 
 	@Override
 	public List<Zoo> findAllZoos() {
@@ -72,7 +75,7 @@ public class ZooServiceImpl implements ZooService {
 
 		zoo.getZooname().ifPresent(updatedZoo::setZooname);
 
-		if (zoo.getAnimals().size() > 0) {
+		if (zoo.getTelephones().size() > 0) {
 			updatedZoo.getTelephones().clear();
 			for (Telephone t : zoo.getTelephones()) {
 				Telephone newTele = new Telephone(t.getPhonenumber(), t.getPhonetype(), updatedZoo);
@@ -81,11 +84,17 @@ public class ZooServiceImpl implements ZooService {
 		}
 
 		if (zoo.getAnimals().size() > 0) {
-			updatedZoo.getAnimals().clear();
+			for(ZooAnimal z: updatedZoo.getAnimals()) {
+				zooRepo.deleteZooAnimal(updatedZoo.getZooid(), z.getAnimal().getAnimalid());
+			}
 			for (ZooAnimal z : zoo.getAnimals()) {
 				Animal animal = animalService.findAnimalById(z.getAnimal().getAnimalid());
-				ZooAnimal newZooAnimal = new ZooAnimal(updatedZoo, animal, z.getIncomingzoo());
-				updatedZoo.getAnimals().add(newZooAnimal);
+				zooRepo.addZooAnimal(
+						updatedZoo.getZooid(),
+						animal.getAnimalid(), 
+						z.getIncomingzoo(),
+						userAuditing.getCurrentAuditor().get());
+				
 			}
 		}
 
