@@ -20,7 +20,7 @@ import com.lambdaschool.javazoos.repositories.ZooRepository;
 public class ZooServiceImpl implements ZooService {
 	@Autowired
 	private ZooRepository zooRepo;
-	
+
 	@Autowired
 	private AnimalService animalService;
 
@@ -41,35 +41,55 @@ public class ZooServiceImpl implements ZooService {
 	@Transactional
 	public Zoo saveZoo(Zoo zoo) {
 		Zoo newZoo = new Zoo();
-		
-		newZoo.setZooname(zoo.getZooname());
-		
-		for(Telephone t: zoo.getTelephones()) {
-			Telephone newTele = new Telephone(
-						t.getPhonenumber(),
-						t.getPhonetype(),
-						newZoo
-					);
+
+		newZoo.setZooname(zoo.getZooname().get());
+
+		for (Telephone t : zoo.getTelephones()) {
+			Telephone newTele = new Telephone(t.getPhonenumber(), t.getPhonetype(), newZoo);
 			newZoo.getTelephones().add(newTele);
 		}
-		
-		for(ZooAnimal z: zoo.getAnimals()) {
+
+		for (ZooAnimal z : zoo.getAnimals()) {
 			Animal animal = animalService.findAnimalById(z.getAnimal().getAnimalid());
-			ZooAnimal newZooAnimal = new ZooAnimal(
-						newZoo,
-						animal,
-						z.getIncomingzoo()
-					);
+			ZooAnimal newZooAnimal = new ZooAnimal(newZoo, animal, z.getIncomingzoo());
 			newZoo.getAnimals().add(newZooAnimal);
 		}
-		
+
 		return zooRepo.save(newZoo);
 	}
 
 	@Override
+	@Transactional
 	public void deleteZooById(long id) {
 		findZooById(id);
 		zooRepo.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public Zoo updateZoo(Zoo zoo, long id) {
+		Zoo updatedZoo = findZooById(id);
+
+		zoo.getZooname().ifPresent(updatedZoo::setZooname);
+
+		if (zoo.getAnimals().size() > 0) {
+			updatedZoo.getTelephones().clear();
+			for (Telephone t : zoo.getTelephones()) {
+				Telephone newTele = new Telephone(t.getPhonenumber(), t.getPhonetype(), updatedZoo);
+				updatedZoo.getTelephones().add(newTele);
+			}
+		}
+
+		if (zoo.getAnimals().size() > 0) {
+			updatedZoo.getAnimals().clear();
+			for (ZooAnimal z : zoo.getAnimals()) {
+				Animal animal = animalService.findAnimalById(z.getAnimal().getAnimalid());
+				ZooAnimal newZooAnimal = new ZooAnimal(updatedZoo, animal, z.getIncomingzoo());
+				updatedZoo.getAnimals().add(newZooAnimal);
+			}
+		}
+
+		return zooRepo.save(updatedZoo);
 	}
 
 }

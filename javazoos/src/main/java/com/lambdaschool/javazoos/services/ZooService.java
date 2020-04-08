@@ -11,5 +11,7 @@ public interface ZooService {
 	
 	public Zoo saveZoo(Zoo zoo);
 	
+	public Zoo updateZoo(Zoo zoo, long id);
+	
 	public void deleteZooById(long id);
 }

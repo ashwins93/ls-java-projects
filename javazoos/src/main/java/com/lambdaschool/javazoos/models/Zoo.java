@@ -2,6 +2,7 @@ package com.lambdaschool.javazoos.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ public class Zoo extends Auditable {
 	@Column(nullable = false)
 	private String zooname;
 
-	@OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties(value = "zoo")
 	private List<Telephone> telephones = new ArrayList<Telephone>();
 	
@@ -51,8 +52,8 @@ public class Zoo extends Auditable {
 		this.zooid = zooid;
 	}
 
-	public String getZooname() {
-		return zooname;
+	public Optional<String> getZooname() {
+		return Optional.ofNullable(zooname);
 	}
 
 	public void setZooname(String zooname) {
