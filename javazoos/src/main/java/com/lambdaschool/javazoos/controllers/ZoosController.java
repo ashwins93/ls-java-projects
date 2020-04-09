@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lambdaschool.javazoos.models.Zoo;
+import com.lambdaschool.javazoos.models.ZooAnimal;
 import com.lambdaschool.javazoos.services.ZooService;
 
 @RestController
@@ -73,7 +74,7 @@ public class ZoosController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/namelike/{name}")
+	@GetMapping(value = "/namelike/{name}", produces = {"application/json"})
 	public ResponseEntity<?> searchZooByName(@PathVariable String name) {
 		List<Zoo> results = zooService.searchZooByName(name);
 		
@@ -84,6 +85,15 @@ public class ZoosController {
 	public ResponseEntity<?> removeAnimalFromZoo(@PathVariable long zooid,
 			@PathVariable long animalid) {
 		zooService.deleteZooAnimalCombo(zooid, animalid);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/{zooid}/animal/{animalid}",
+			consumes = {"application/json"})
+	public ResponseEntity<?> addAnimalToZoo(@PathVariable long zooid,
+			@PathVariable long animalid, @RequestBody ZooAnimal zooAnimal) {
+		zooService.addZooAnimalCombo(zooid, animalid, zooAnimal.getIncomingzoo());
+		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

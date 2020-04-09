@@ -117,7 +117,13 @@ public class ZooServiceImpl implements ZooService {
 		
 		zooRepo.deleteZooAnimal(zooid, animalid);
 	}
-	
-	
 
+	@Override
+	public void addZooAnimalCombo(long zooid, long animalid, String incomingzoo) {
+		findZooById(zooid);
+		animalService.findAnimalById(animalid);
+		String uname = userAuditing.getCurrentAuditor().get();
+		
+		zooRepo.addZooAnimal(zooid, animalid, incomingzoo, uname);
+	}
 }

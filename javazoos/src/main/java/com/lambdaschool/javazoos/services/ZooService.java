@@ -19,5 +19,5 @@ public interface ZooService {
 	
 	public void deleteZooAnimalCombo(long zooid, long animalid);
 	
-	public void addZooAnimalCombo(long zooid, long animalid);
+	public void addZooAnimalCombo(long zooid, long animalid, String incomingzoo);
 }
