@@ -109,6 +109,14 @@ public class ZooServiceImpl implements ZooService {
 			.forEachRemaining(results::add);
 		return results;
 	}
+
+	@Override
+	public void deleteZooAnimalCombo(long zooid, long animalid) {
+		findZooById(zooid);
+		animalService.findAnimalById(animalid);
+		
+		zooRepo.deleteZooAnimal(zooid, animalid);
+	}
 	
 	
 

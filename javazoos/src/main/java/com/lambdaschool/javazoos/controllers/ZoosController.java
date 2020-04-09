@@ -79,4 +79,11 @@ public class ZoosController {
 		
 		return new ResponseEntity<>(results, HttpStatus.OK);
 	}
+	
+	@DeleteMapping(value = "/{zooid}/animal/{animalid}")
+	public ResponseEntity<?> removeAnimalFromZoo(@PathVariable long zooid,
+			@PathVariable long animalid) {
+		zooService.deleteZooAnimalCombo(zooid, animalid);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }
