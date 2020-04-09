@@ -73,4 +73,10 @@ public class ZoosController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/namelike/{name}")
+	public ResponseEntity<?> searchZooByName(@PathVariable String name) {
+		List<Zoo> results = zooService.searchZooByName(name);
+		
+		return new ResponseEntity<>(results, HttpStatus.OK);
+	}
 }

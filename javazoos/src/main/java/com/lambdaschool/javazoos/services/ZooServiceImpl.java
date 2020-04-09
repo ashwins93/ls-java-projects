@@ -101,4 +101,15 @@ public class ZooServiceImpl implements ZooService {
 		return zooRepo.save(updatedZoo);
 	}
 
+	@Override
+	public List<Zoo> searchZooByName(String zooname) {
+		List<Zoo> results = new ArrayList<>();
+		zooRepo.findByZoonameContainingIgnoreCase(zooname)
+			.iterator()
+			.forEachRemaining(results::add);
+		return results;
+	}
+	
+	
+
 }

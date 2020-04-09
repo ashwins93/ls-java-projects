@@ -14,4 +14,6 @@ public interface ZooService {
 	public Zoo updateZoo(Zoo zoo, long id);
 	
 	public void deleteZooById(long id);
+	
+	public List<Zoo> searchZooByName(String zooname);
 }

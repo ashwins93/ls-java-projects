@@ -1,6 +1,8 @@
 package com.lambdaschool.javazoos.repositories;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -24,6 +26,8 @@ public interface ZooRepository extends CrudRepository<Zoo, Long> {
 			long animalid,
 			String incomingzoo,
 			String uname);
+	
+	public List<Zoo> findByZoonameContainingIgnoreCase(String zooname);
 	
 
 }
