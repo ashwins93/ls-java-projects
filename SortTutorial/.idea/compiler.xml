@@ -8,20 +8,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sortinterface" />
         <module name="sortsupportclasses" />
-        <module name="SortTutorial" />
         <module name="bubble" />
         <module name="main" />
         <module name="quick" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="bubble" target="1.5" />
-      <module name="main" target="1.5" />
-      <module name="Main" target="1.5" />
-      <module name="quick" target="1.5" />
-      <module name="sortinterface" target="1.5" />
-      <module name="sortsupportclasses" target="1.5" />
-      <module name="SortTutorial" target="1.11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -7,6 +7,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <name>SortTutorial</name>
   <url>http://maven.apache.org</url>
+
   <build>
     <plugins>
       <plugin>
@@ -21,12 +22,43 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+
+
+
+  <modules>
+    <module>sortsupportclasses</module>
+    <module>sortinterface</module>
+    <module>bubble</module>
+    <module>quick</module>
+    <module>main</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.github.ashwins93</groupId>
+        <artifactId>sortinterface</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.ashwins93</groupId>
+        <artifactId>quick</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.ashwins93</groupId>
+        <artifactId>sortsupportclasses</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>

@@ -3,6 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SortTutorial.iml" filepath="$PROJECT_DIR$/SortTutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bubble/bubble.iml" filepath="$PROJECT_DIR$/bubble/bubble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quick/quick.iml" filepath="$PROJECT_DIR$/quick/quick.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sortinterface/sortinterface.iml" filepath="$PROJECT_DIR$/sortinterface/sortinterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sortsupportclasses/sortsupportclasses.iml" filepath="$PROJECT_DIR$/sortsupportclasses/sortsupportclasses.iml" />
     </modules>
   </component>
 </project>
