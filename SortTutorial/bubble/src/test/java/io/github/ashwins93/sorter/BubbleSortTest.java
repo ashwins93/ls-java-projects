@@ -19,37 +19,12 @@ public class BubbleSortTest {
                 "Wilkinson", "Abraham", "Dagobert"
         ));
 
-        var names = new Sortable() {
-            public int size() {
-                return actualNames.size();
-            }
 
-            public Object get(int index) {
-                return actualNames.get(index);
-            }
-        };
 
-        class SwapActualNamesArrayElements implements Swapper {
-            @Override
-            public void swap(int i, int j) {
-                final Object tmp = actualNames.get(i);
-                actualNames.set(i, actualNames.get(j));
-                actualNames.set(j, tmp);
-            }
-        }
-
-        var stringCompare = new Comparator<>() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                final String f = (String) o1;
-                final String s = (String) o2;
-                return f.compareTo(s);
-            }
-        };
-
+        var names = new ArrayListSortable(actualNames);
         var sort = new BubbleSort();
-        sort.setSwapper(new SwapActualNamesArrayElements());
-        sort.setComparator(stringCompare);
+        sort.setSwapper(new ArrayListSwapper(actualNames));
+        sort.setComparator(new StringComparator());
         sort.sort(names);
 
         Assert.assertEquals(List.of(
