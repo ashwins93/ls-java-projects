@@ -7,11 +7,11 @@ import io.github.ashwins93.interfaces.Swapper;
 
 import java.util.Comparator;
 
-public class BubbleSort implements Sort, SortSupport {
+public class BubbleSort<E> implements Sort<E>, SortSupport<E> {
     private Swapper swapper;
-    private Comparator comparator;
+    private Comparator<E> comparator;
 
-    public void sort(Sortable collection) {
+    public void sort(Sortable<E> collection) {
         var n = collection.size();
         while(n > 1) {
             for(int j = 0; j < n - 1; j++) {
@@ -32,11 +32,11 @@ public class BubbleSort implements Sort, SortSupport {
         this.swapper = swapper;
     }
 
-    public Comparator getComparator() {
+    public Comparator<E> getComparator() {
         return comparator;
     }
 
-    public void setComparator(Comparator comparator) {
+    public void setComparator(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 }

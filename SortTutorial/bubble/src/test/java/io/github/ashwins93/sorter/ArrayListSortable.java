@@ -4,10 +4,10 @@ import io.github.ashwins93.interfaces.Sortable;
 
 import java.util.ArrayList;
 
-public class ArrayListSortable implements Sortable {
-    final ArrayList actualNames;
+public class ArrayListSortable<E> implements Sortable<E> {
+    final ArrayList<E> actualNames;
 
-    ArrayListSortable(ArrayList actualNames) {
+    ArrayListSortable(ArrayList<E> actualNames) {
         this.actualNames = actualNames;
     }
 
@@ -17,7 +17,7 @@ public class ArrayListSortable implements Sortable {
     }
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
         return actualNames.get(index);
     }
 }

@@ -1,6 +1,6 @@
 package io.github.ashwins93.interfaces;
 
-public interface Sortable {
+public interface Sortable<E> {
     int size();
-    Object get(int index);
+    E get(int index);
 }
