@@ -1,4 +1,4 @@
-package io.github.ashwins93.quick;
+package io.github.ashwins93.quick.impl;
 
 import io.github.ashwins93.interfaces.Sortable;
 import io.github.ashwins93.interfaces.Swapper;
@@ -6,12 +6,12 @@ import io.github.ashwins93.interfaces.Swapper;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-public class NonRecursiveQuickSort<E> {
+public class NonRecursiveQSort<E> {
     private final Comparator<E> comparator;
     private final Swapper swapper;
     private final Partitioner<E> partitioner;
 
-    public NonRecursiveQuickSort(Comparator<E> comparator, Swapper swapper) {
+    public NonRecursiveQSort(Comparator<E> comparator, Swapper swapper) {
         this.comparator = comparator;
         this.swapper = swapper;
         this.partitioner = new Partitioner<>(comparator, swapper);

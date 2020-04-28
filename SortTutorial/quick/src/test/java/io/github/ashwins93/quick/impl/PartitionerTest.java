@@ -1,4 +1,4 @@
-package io.github.ashwins93.quick;
+package io.github.ashwins93.quick.impl;
 
 import io.github.ashwins93.support.ArrayWrapper;
 import org.junit.Assert;
