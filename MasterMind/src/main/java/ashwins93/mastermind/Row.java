@@ -3,7 +3,7 @@ package ashwins93.mastermind;
 import java.util.Arrays;
 
 public class Row {
-    public static final Row none = new Row();
+    public static final Row none = new Row(Guesser.none);
     final Color[] positions;
     protected int matchedPositions;
     protected int matchedColors;
